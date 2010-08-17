@@ -1,40 +1,35 @@
-Name:           python-markupsafe
-Version:        0.9.2
-Release:        %mkrel 1
-Summary:        Implements a XML/HTML/XHTML Markup safe string for Python
-Group:          System/Libraries
-License:        MIT
-URL:            http://pypi.python.org/pypi/MarkupSafe
-Source0:        http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+%define tarname MarkupSafe
+%define name	python-markupsafe
+%define version 0.9.3
+%define release %mkrel 1
 
-BuildRequires:  python-devel
-BuildRequires:  python-setuptools
-
+Summary:	XML/HTML/XHTML markup safe string package for Python
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/%{tarname}-%{version}.tar.gz
+License:	BSD
+Group:		Development/Python
+Url:		http://pypi.python.org/pypi/MarkupSafe
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+%py_requires -d
 
 %description
-Implements a unicode subclass that supports HTML strings.
-
+This package implements a XML/HTML/XHTML markup safe string for Python.
 
 %prep
-%setup -q -n MarkupSafe-%{version}
+%setup -q -n %{tarname}-%{version}
 
 %build
-%{__python} setup.py build
-
+PYTHONDONTWRITEBYTECODE= %__python setup.py build
 
 %install
-rm -rf %{buildroot}
-%{__python} setup.py install --root=%{buildroot}
-
+%__rm -rf %{buildroot}
+PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=FILE_LIST
 
 %clean
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 
-
-%files 
-%defattr(-,root,root,-)
-%{py_platsitedir}/MarkupSafe-%{version}-py%{pyver}*
-%{py_platsitedir}/markupsafe/*
-
-
+%files -f FILE_LIST
+%defattr(-,root,root)
+%doc AUTHORS LICENSE README.rst
