@@ -12,6 +12,7 @@ License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	python-setuptools
 %py_requires -d
 
 %description
