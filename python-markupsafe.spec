@@ -1,6 +1,6 @@
 %define tarname MarkupSafe
 %define name	python-markupsafe
-%define version 0.9.3
+%define version 0.11
 %define release %mkrel 1
 
 Summary:	XML/HTML/XHTML markup safe string package for Python
@@ -13,6 +13,7 @@ Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	python-setuptools
+BuildRequires:	python-nose
 %py_requires -d
 
 %description
@@ -27,6 +28,9 @@ PYTHONDONTWRITEBYTECODE= %__python setup.py build
 %install
 %__rm -rf %{buildroot}
 PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=FILE_LIST
+
+%check
+nosetests
 
 %clean
 %__rm -rf %{buildroot}
