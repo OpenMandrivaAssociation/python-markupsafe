@@ -1,7 +1,7 @@
 %define tarname MarkupSafe
 %define name	python-markupsafe
 %define version 0.11
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary:	XML/HTML/XHTML markup safe string package for Python
 Name:		%{name}
