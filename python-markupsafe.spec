@@ -3,6 +3,8 @@
 %define version 0.11
 %define release %mkrel 2
 
+%define enable_tests 0
+
 Summary:	XML/HTML/XHTML markup safe string package for Python
 Name:		%{name}
 Version:	%{version}
@@ -13,7 +15,9 @@ Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	python-setuptools
+%if %enable_tests
 BuildRequires:	python-nose
+%endif
 %py_requires -d
 
 %description
@@ -30,8 +34,9 @@ PYTHONDONTWRITEBYTECODE= %__python setup.py build
 PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=FILE_LIST
 
 %check
+%if %enable_tests
 nosetests
-
+%endif
 %clean
 %__rm -rf %{buildroot}
 
