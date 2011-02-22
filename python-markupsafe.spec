@@ -14,7 +14,7 @@ BuildRequires:	python-setuptools
 %if %enable_tests
 BuildRequires:	python-nose
 %endif
-%py_requires -d
+BuildRequires:	python-devel
 
 %description
 This package implements a XML/HTML/XHTML markup safe string for Python.
