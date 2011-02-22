@@ -1,14 +1,10 @@
 %define tarname MarkupSafe
-%define name	python-markupsafe
-%define version 0.11
-%define release %mkrel 2
-
 %define enable_tests 0
 
 Summary:	XML/HTML/XHTML markup safe string package for Python
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		python-markupsafe
+Version:	0.12
+Release:	%mkrel 1
 Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/%{tarname}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
