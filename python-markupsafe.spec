@@ -5,7 +5,7 @@
 Summary:	XML/HTML/XHTML markup safe string package for Python
 Name:		python-%{modname}
 Version:	0.12
-Release:	%mkrel 1
+Release:	%mkrel 2
 Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/%{eggname}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
