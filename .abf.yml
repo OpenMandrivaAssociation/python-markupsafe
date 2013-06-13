@@ -1,4 +1,5 @@
 removed_sources:
   MarkupSafe-0.12.tar.gz: f7c6b835f3c5e1d581209ec33a6bbcbd861c4884
-sources:
   MarkupSafe-0.15.tar.gz: 81e0c898c289721d5b1aa70ffc0dfc35886ea92a
+sources:
+  MarkupSafe-0.18.tar.gz: 9fe11891773f922a8b92e83c8f48edeb2f68631e
