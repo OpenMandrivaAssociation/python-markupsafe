@@ -8,36 +8,67 @@
 Summary:	XML/HTML/XHTML markup safe string package for Python
 Name:		python-%{modname}
 Version:	0.18
-Release:	2
+Release:	3
 Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
 BuildRequires:	python-distribute
+BuildRequires:	python3-distribute
 %if %{enable_tests}
 BuildRequires:	python-nose
+BuildRequires:	python3-nose
 %endif
 BuildRequires:	python-devel
+BuildRequires:	python3-devel
 
 %description
 This package implements a XML/HTML/XHTML markup safe string for Python.
 
+%package -n python3-%{modname}
+Summary:    XML/HTML/XHTML markup safe string package for Python3
+
+%description -n python3-%{modname}
+This package implements a XML/HTML/XHTML markup safe string for Python3.
+
 %prep
-%setup -q -n %{eggname}-%{version}
+%setup -q -c
+
+mv %{eggname}-%{version} python2
+cp -r python2 python3
 
 %build
-PYTHONDONTWRITEBYTECODE= %__python setup.py build
+pushd python2
+PYTHONDONTWRITEBYTECODE= python setup.py build
+popd
+
+pushd python3
+PYTHONDONTWRITEBYTECODE= python3 setup.py build
+popd
 
 %install
-PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot}
+pushd python2
+PYTHONDONTWRITEBYTECODE= python setup.py install --root=%{buildroot}
+popd
+
+pushd python3
+PYTHONDONTWRITEBYTECODE= python3 setup.py install --root=%{buildroot}
+rm -rf %{buildroot}/%{py3_platsitedir}/%{modname}/__pycache__
+popd
 
 %check
 %if %{enable_tests}
+pushd python2
 nosetests
+popd
+
+pushd python3
+nosetests
+popd
 %endif
 
 %files
-%doc AUTHORS LICENSE README.rst
+%doc python2/AUTHORS python2/LICENSE python2/README.rst
 %dir %{py_platsitedir}/%{modname}
 %{py_platsitedir}/%{modname}/*.py*
 %{py_platsitedir}/%{modname}/*.so
@@ -45,35 +76,11 @@ nosetests
 %dir %{py_platsitedir}/%{eggname}-%{version}-py%{py_ver}.egg-info
 %{py_platsitedir}/%{eggname}-%{version}-py%{py_ver}.egg-info/*
 
-
-%changelog
-* Thu May 05 2011 Oden Eriksson <oeriksson@mandriva.com> 0.12-2mdv2011.0
-+ Revision: 667967
-- mass rebuild
-
-* Tue Feb 22 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.12-1
-+ Revision: 639313
-- don't use manifest, but rather explicitly provide a %%files list
-- replace '%%py_requires -d' macro with a generic BuildRequires: python-devel
-- new release 0.12
-
-* Sat Oct 30 2010 Michael Scherer <misc@mandriva.org> 0.11-2mdv2011.0
-+ Revision: 590386
-- disable test, like for sphinx ( bootstraping for python 2.7 )
-- rebuild for python 2.7
-
-* Wed Oct 20 2010 Lev Givon <lev@mandriva.org> 0.11-1mdv2011.0
-+ Revision: 587008
-- Update to 0.11.
-
-* Tue Aug 17 2010 Lev Givon <lev@mandriva.org> 0.9.3-1mdv2011.0
-+ Revision: 571051
-- Update to 0.9.3.
-
-* Sun Aug 08 2010 Crispin Boylan <crisb@mandriva.org> 0.9.2-1mdv2011.0
-+ Revision: 567631
-- New package
-- create python-markupsafe
-
-
-
+%files -n python3-%{modname}
+%doc python3/AUTHORS python3/LICENSE python3/README.rst
+%dir %{py3_platsitedir}/%{modname}
+%{py3_platsitedir}/%{modname}/*.py*
+%{py3_platsitedir}/%{modname}/*.so
+%{py3_platsitedir}/%{modname}/*.c
+%dir %{py3_platsitedir}/%{eggname}-%{version}-py%{py3_ver}.egg-info
+%{py3_platsitedir}/%{eggname}-%{version}-py%{py3_ver}.egg-info/*
