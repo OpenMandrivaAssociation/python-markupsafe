@@ -9,24 +9,24 @@ Summary:	XML/HTML/XHTML markup safe string package for Python
 Name:		python-%{modname}
 Version:	0.18
 Release:	3
-Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
+Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
 BuildRequires:	python-distribute
 BuildRequires:	python3-distribute
 %if %{enable_tests}
 BuildRequires:	python-nose
 BuildRequires:	python3-nose
 %endif
-BuildRequires:	python-devel
-BuildRequires:	python3-devel
+BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 
 %description
 This package implements a XML/HTML/XHTML markup safe string for Python.
 
 %package -n python3-%{modname}
-Summary:    XML/HTML/XHTML markup safe string package for Python3
+Summary:	XML/HTML/XHTML markup safe string package for Python3
 
 %description -n python3-%{modname}
 This package implements a XML/HTML/XHTML markup safe string for Python3.
@@ -84,3 +84,4 @@ popd
 %{py3_platsitedir}/%{modname}/*.c
 %dir %{py3_platsitedir}/%{eggname}-%{version}-py%{py3_ver}.egg-info
 %{py3_platsitedir}/%{eggname}-%{version}-py%{py3_ver}.egg-info/*
+
