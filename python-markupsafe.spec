@@ -8,7 +8,7 @@
 Summary:	XML/HTML/XHTML markup safe string package for Python
 Name:		python-%{modname}
 Version:	0.18
-Release:	3
+Release:	4
 License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
