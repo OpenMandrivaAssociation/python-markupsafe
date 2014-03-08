@@ -8,10 +8,10 @@ Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/%{tarname}-%{versio
 License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
-BuildRequires:	python-setuptools
+BuildRequires:	python-distribute
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(python3)
-BuildRequires:	python3-setuptools
+BuildRequires:	python3-distribute
 
 %description
 This package implements a XML/HTML/XHTML markup safe string for Python.
