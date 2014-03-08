@@ -1,88 +1,54 @@
-%define	eggname	MarkupSafe
-%define	modname	markupsafe
-%define	enable_tests 0
-
-# Disable useless provides ('_speedups.so' and similar)
-%define __noautoprov '_.*\.so'
+%define tarname MarkupSafe
 
 Summary:	XML/HTML/XHTML markup safe string package for Python
-Name:		python-%{modname}
+Name:		python-markupsafe
 Version:	0.18
-Release:	7
+Release:	10
+Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/%{tarname}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
-Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
-Source1:	python-markupsafe.rpmlintrc
-BuildRequires:	python-distribute
-BuildRequires:	python3-distribute
-%if %{enable_tests}
-BuildRequires:	python-nose
-BuildRequires:	python3-nose
-%endif
+BuildRequires:	python-setuptools
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(python3)
+BuildRequires:	python3-setuptools
 
 %description
 This package implements a XML/HTML/XHTML markup safe string for Python.
 
-%package -n python3-%{modname}
-Summary:	XML/HTML/XHTML markup safe string package for Python3
+%package -n python3-markupsafe
+Summary:	XML/HTML/XHTML markup safe string package for Python
+Group:		Development/Python
 
-%description -n python3-%{modname}
+%description -n python3-markupsafe
 This package implements a XML/HTML/XHTML markup safe string for Python3.
 
 %prep
-%setup -q -c
-
-mv %{eggname}-%{version} python2
-cp -r python2 python3
+%setup -q -n %{tarname}-%{version}
+rm -rf %{py3dir}
+cp -a . %{py3dir}
+2to3 --write --nobackups %{py3dir}
 
 %build
-pushd python2
-PYTHONDONTWRITEBYTECODE= python setup.py build
-popd
-
-pushd python3
-PYTHONDONTWRITEBYTECODE= python3 setup.py build
+CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
+pushd %{py3dir}
+CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 popd
 
 %install
-pushd python2
-PYTHONDONTWRITEBYTECODE= python setup.py install --root=%{buildroot}
+pushd %{py3dir}
+%{__python3} setup.py install -O1 --skip-build --root %{buildroot}
+rm %{buildroot}/%{python3_sitearch}/markupsafe/*.c
 popd
 
-pushd python3
-PYTHONDONTWRITEBYTECODE= python3 setup.py install --root=%{buildroot}
-rm -rf %{buildroot}/%{py3_platsitedir}/%{modname}/__pycache__
-popd
-
-%check
-%if %{enable_tests}
-pushd python2
-nosetests
-popd
-
-pushd python3
-nosetests
-popd
-%endif
+%{__python} setup.py install -O1 --skip-build --root %{buildroot}
+# C code errantly gets installed
+rm %{buildroot}/%{python_sitearch}/markupsafe/*.c
 
 %files
-%doc python2/AUTHORS python2/LICENSE python2/README.rst
-%dir %{py_platsitedir}/%{modname}
-%{py_platsitedir}/%{modname}/*.py*
-%{py_platsitedir}/%{modname}/*.so
-%{py_platsitedir}/%{modname}/*.c
-%dir %{py_platsitedir}/%{eggname}-%{version}-py%{py_ver}.egg-info
-%{py_platsitedir}/%{eggname}-%{version}-py%{py_ver}.egg-info/*
+%doc AUTHORS LICENSE README.rst
+%{python_sitearch}/*
 
-%files -n python3-%{modname}
-%doc python3/AUTHORS python3/LICENSE python3/README.rst
-%dir %{py3_platsitedir}/%{modname}
-%{py3_platsitedir}/%{modname}/*.py*
-%{py3_platsitedir}/%{modname}/*.so
-%{py3_platsitedir}/%{modname}/*.c
-%dir %{py3_platsitedir}/%{eggname}-%{version}-py%{py3_ver}.egg-info
-%{py3_platsitedir}/%{eggname}-%{version}-py%{py3_ver}.egg-info/*
-
+%files -n python3-markupsafe
+%doc AUTHORS LICENSE README.rst
+%{python3_sitearch}/*
