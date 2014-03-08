@@ -13,6 +13,7 @@ License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
 Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
+Source1:	python-markupsafe.rpmlintrc
 BuildRequires:	python-distribute
 BuildRequires:	python3-distribute
 %if %{enable_tests}
