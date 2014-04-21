@@ -1,4 +1,5 @@
 %define tarname MarkupSafe
+%define py3dir ../python3
 
 Summary:	XML/HTML/XHTML markup safe string package for Python
 Name:		python-markupsafe
