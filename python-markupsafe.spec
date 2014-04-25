@@ -1,10 +1,11 @@
 %define tarname MarkupSafe
 
 Summary:	XML/HTML/XHTML markup safe string package for Python
+
 Name:		python-markupsafe
-Version:	0.18
-Release:	10
-Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/%{tarname}-%{version}.tar.gz
+Version:	0.21
+Release:	1
+Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
@@ -18,6 +19,7 @@ This package implements a XML/HTML/XHTML markup safe string for Python.
 
 %package -n python3-markupsafe
 Summary:	XML/HTML/XHTML markup safe string package for Python
+
 Group:		Development/Python
 
 %description -n python3-markupsafe
@@ -30,25 +32,26 @@ cp -a . %{py3dir}
 2to3 --write --nobackups %{py3dir}
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
+CFLAGS="%{optflags}" python setup.py build
 pushd %{py3dir}
-CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
+CFLAGS="%{optflags}" %{__python3} setup.py build
 popd
 
 %install
 pushd %{py3dir}
 %{__python3} setup.py install -O1 --skip-build --root %{buildroot}
-rm %{buildroot}/%{python3_sitearch}/markupsafe/*.c
+rm %{buildroot}/%{py3_platsitedir}/markupsafe/*.c
 popd
 
-%{__python} setup.py install -O1 --skip-build --root %{buildroot}
+python setup.py install -O1 --skip-build --root %{buildroot}
 # C code errantly gets installed
-rm %{buildroot}/%{python_sitearch}/markupsafe/*.c
+rm %{buildroot}/%{py_platsitedir}/markupsafe/*.c
 
 %files
 %doc AUTHORS LICENSE README.rst
-%{python_sitearch}/*
+%{py_platsitedir}/*
 
 %files -n python3-markupsafe
 %doc AUTHORS LICENSE README.rst
-%{python3_sitearch}/*
+%{py3_platsitedir}/*
+
