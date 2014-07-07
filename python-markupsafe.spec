@@ -10,7 +10,6 @@ Source0:	http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-%{versio
 License:	BSD
 Group:		Development/Python
 Url:		http://pypi.python.org/pypi/MarkupSafe
-BuildRequires:	python-distribute
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	python3-distribute
@@ -21,9 +20,8 @@ This package implements a XML/HTML/XHTML markup safe string for Python.
 
 %package -n python2-markupsafe
 Summary:	XML/HTML/XHTML markup safe string package for Python 2
-
-
 Group:		Development/Python
+BuildRequires:	python2-distribute
 
 %description -n python2-markupsafe
 This package implements a XML/HTML/XHTML markup safe string for Python
