@@ -53,5 +53,5 @@ rm %{buildroot}/%{py2_platsitedir}/markupsafe/*.c
 %{py_platsitedir}/*
 
 %files -n python2-markupsafe
-%doc AUTHORS LICENSE README.rst
+%doc README.rst
 %{py2_platsitedir}/*
