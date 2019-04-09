@@ -49,7 +49,7 @@ python2 setup.py install -O1 --skip-build --root %{buildroot}
 rm %{buildroot}/%{py2_platsitedir}/markupsafe/*.c
 
 %files
-%doc AUTHORS LICENSE README.rst
+%doc README.rst
 %{py_platsitedir}/*
 
 %files -n python2-markupsafe
