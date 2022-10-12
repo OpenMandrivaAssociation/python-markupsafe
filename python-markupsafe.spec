@@ -4,7 +4,7 @@ Summary:	XML/HTML/XHTML markup safe string package for Python
 
 
 Name:		python-markupsafe
-Version:	2.1.0
+Version:	2.1.1
 Release:	1
 Source0:	https://files.pythonhosted.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
 License:	BSD
