@@ -9,7 +9,7 @@ Release:	1
 Source0:	https://files.pythonhosted.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
-Url:		http://pypi.python.org/pypi/MarkupSafe
+Url:		https://pypi.python.org/pypi/MarkupSafe
 BuildRequires:	pkgconfig(python)
 BuildRequires:	python-setuptools
 %rename python3-markupsafe
