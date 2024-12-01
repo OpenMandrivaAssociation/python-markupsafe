@@ -1,17 +1,17 @@
-%define tarname MarkupSafe
+%define tarname markupsafe
 
 Summary:	XML/HTML/XHTML markup safe string package for Python
 
 
 Name:		python-markupsafe
-Version:	2.1.5
+Version:	3.0.2
 Release:	1
-Source0:	https://files.pythonhosted.org/packages/source/M/MarkupSafe/MarkupSafe-%{version}.tar.gz
+Source0:	https://files.pythonhosted.org/packages/source/m/markupsafe/markupsafe-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
-Url:		https://pypi.python.org/pypi/MarkupSafe
-BuildRequires:	pkgconfig(python)
-BuildRequires:	python-setuptools
+Url:		https://pypi.org/project/MarkupSafe/
+BuildSystem:	python
+BuildRequires:	pkgconfig(python3)
 %rename python3-markupsafe
 Obsoletes:	python2-markupsafe < %{EVRD}
 
@@ -21,12 +21,5 @@ This package implements a XML/HTML/XHTML markup safe string for Python.
 %prep
 %autosetup -p1 -n %{tarname}-%{version}
 
-%build
-CFLAGS="%{optflags}" python setup.py build
-
-%install
-python setup.py install -O1 --skip-build --root %{buildroot}
-
 %files
-%doc README.rst
 %{py_platsitedir}/*
