@@ -10,6 +10,7 @@ Group:		Development/Python
 Url:		https://pypi.org/project/MarkupSafe/
 BuildSystem:	python
 BuildRequires:	pkgconfig(python3)
+BuildRequires:	python%{pyver}dist(setuptools)
 %rename python3-markupsafe
 Obsoletes:	python2-markupsafe < %{EVRD}
 
